@@ -1,17 +1,14 @@
 // Exercise nr 3 i 4
 
-const makeArray = () => {
-    const arrayOfNumbers = []
-    for(let i = 0; i < 10; i++) {
-        const random  = Math.floor(Math.random() * 11)
-        arrayOfNumbers.push(random)
-    }
-    return arrayOfNumbers
-}
-const generateArray = makeArray()
+const array = [1,2,3,4,5,6,7,8,9,10]
+
+const makeArray = ar => ar.map(item => Math.floor(Math.random(item) * 10))
 
 const generate10Arrays = arr => {
-    const tenArrays = []
-    for(let i = 0; i < 10; i++) tenArrays.push(arr)
+    const tenArrays = arr.map((item,index,array) => {
+        return array.map(item => Math.floor(Math.random(item) * 10))
+    })
     return tenArrays
 }
+
+const tenMixedArrays = generate10Arrays(makeArray(array))

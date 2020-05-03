@@ -2,8 +2,8 @@
 
 // Filter 
 const filterFN = (array, callback) => {
-    if(!array.length) return 'array is empty';
-    if(typeof callback != 'function') return 'callback is not a function';
+    if(!array.length) throw new Error('array is empty');
+    if(typeof callback != 'function') throw new Error('callback is not a function');
     const newArr = [];
     for(let i = 0; i < array.length; i++) {
         let elements = array[i];
@@ -15,8 +15,8 @@ const filterFN = (array, callback) => {
 
 // Map
 const mapFN = (array, callback) => {
-    if(!array.length) return 'array is empty';
-    if(typeof callback != 'function') return ;
+    if(!array.length) throw new Error('array is empty');
+    if(typeof callback != 'function') throw new Error('Callback is not a function');
     const newAr = [];
     for(let i = 0; i < array.length; i++) {
         let elements = array[i];
@@ -28,8 +28,8 @@ const mapFN = (array, callback) => {
 
 // Reduce
 const reduceFN = (array, callback, initialValue = 0) => {
-    if(!array.length) return 'array is empty';
-    if(typeof callback != 'function') return 'callback is not a function';
+    if(!array.length) throw new Error('array is empty');
+    if(typeof callback != 'function') throw new Error('Callback is not a function');
     let accumulator = initialValue;
     for(element of array) accumulator = callback(accumulator,element);
     return accumulator
