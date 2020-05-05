@@ -4,5 +4,9 @@ const arrayOfStrings = ['Kasia', 'Asia', 'Basia', 'Tomek','Maciek','Damian','Pat
 
 const filterArray = str => {
     if(typeof str != 'string') throw new Error('Argument have to be a string, please enter correct value');
-    return arrayOfStrings.includes(str) ? `Szukana fraza to ${str} i wystepuje pod indexem nr${arrayOfStrings.indexOf(str)}` : `Fraza ${str} nie występuje w tablicy`
+    return arrayOfStrings.filter(item => {
+        if(item.toLowerCase().includes(str.toLowerCase())) return item
+    })
 }
+
+console.log(filterArray('as'));
