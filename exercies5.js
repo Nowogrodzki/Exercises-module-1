@@ -8,5 +8,3 @@ const filterArray = str => {
         if(item.toLowerCase().includes(str.toLowerCase())) return item
     })
 }
-
-console.log(filterArray('as'));
