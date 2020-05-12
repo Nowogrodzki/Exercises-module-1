@@ -17,11 +17,11 @@ const arrayObj = [{
     age: 27,
 }]
 
-const filterWith = (array, filter) => {
+const filterWith = (array, filter, search) => {
     if(!filter.length) return array
     if(filter.length < 3) throw new Error('Nothing to filter')
-    return array.filter(item => item[filter]);
+    return array.filter(item => item[filter].toLowerCase().includes(search.toLowerCase()))
 }
 
-console.log(filterWith(arrayObj, ''));
+console.log(filterWith(arrayObj, 'name', 'marek'));
 
