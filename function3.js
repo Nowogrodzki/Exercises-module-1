@@ -11,20 +11,17 @@ const arrayObj = [{
     age: 35
 },{
     name: 'Staszek',
-    age: 22
+    age: 22,
 }, {
     name: 'Marek',
-    age: 27
+    age: 27,
 }]
 
 const filterWith = (array, filter) => {
     if(!filter.length) return array
-    if(filter.length < 3) return 'Nothing to filter'
-    let sum = '';
-    for(const item of array) {
-        sum += ` ${item[filter]}`
-    }
-    return sum
+    if(filter.length < 3) throw new Error('Nothing to filter')
+    return array.filter(item => item[filter]);
 }
 
-const keys = filterWith(arrayObj, 'name')
+console.log(filterWith(arrayObj, ''));
+
