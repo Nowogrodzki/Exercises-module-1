@@ -15,13 +15,21 @@ const arrayObj = [{
 }, {
     name: 'Marek',
     age: 27,
+    surname: 'Kowalski'
 }]
 
 const filterWith = (array, filter, search) => {
     if(!filter.length) return array
     if(filter.length < 3) throw new Error('Nothing to filter')
-    return array.filter(item => item[filter].toLowerCase().includes(search.toLowerCase()))
+    return array.filter(item => {
+        for(let [key, value] of Object.entries(item)) {
+            if(typeof value === 'string') {
+                if(value.toLowerCase().includes(filter.toLowerCase())) return item
+            }
+            if(key.toLowerCase().includes(filter.toLowerCase())) return item
+        }
+    })
 }
 
-console.log(filterWith(arrayObj, 'name', 'marek'));
+console.log(filterWith(arrayObj, 'sur'));
 

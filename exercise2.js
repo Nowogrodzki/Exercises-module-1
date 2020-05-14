@@ -6,4 +6,4 @@ const triangle = (a,b,c) => {
     return a + b > c ? `Długość krótszych boków a i b jest większa od C co oznacze ze jest git` : `to nie jest trójkąt prostokątny`;
 }
 
-console.log(triangle(3,4,5));
+console.log(triangle(5,4,3));
