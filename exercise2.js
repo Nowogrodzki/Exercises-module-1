@@ -2,8 +2,8 @@
 
 const isRectangularTriangle = function (x1,x2,x3) {
     const arrayOfArguments = Array.from(arguments);
-    const areAllArgumentsAreNumbers = arrayOfArguments.some(item => typeof item !== 'number')
-    if(areAllArgumentsAreNumbers) {
+    const isAtLeastOneArgumentNotNumber = arrayOfArguments.some(item => typeof item !== 'number')
+    if(isAtLeastOneArgumentNotNumber) {
         throw new Error('Arguments have to be a numbers');
     }
     const areAllGreaterThenZero = arrayOfArguments.some(item => item < 0);
