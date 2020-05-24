@@ -8,8 +8,7 @@ const forLoop = (array, callback) => {
     if(typeof callback != 'function') return `Podany callback nie jest funkcja ${callback}`
     let newArray = [];
     for(let i = 0; i < array.length; i++) {
-        elements = array[i];
-        let statement = callback(elements, i, array);
+        let statement = callback(array[i], i, array);
         newArray.push(statement)
     }
     return newArray;

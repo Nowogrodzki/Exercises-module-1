@@ -18,18 +18,20 @@ const arrayObj = [{
     surname: 'Kowalski'
 }]
 
-const filterWith = (array, filter, search) => {
+const isIn = (filter, value) => value.toLowerCase().includes(filter.toLowerCase());
+
+const filterWith = (array, filter) => {
     if(!filter.length) return array
     if(filter.length < 3) throw new Error('Nothing to filter')
     return array.filter(item => {
         for(let [key, value] of Object.entries(item)) {
             if(typeof value === 'string') {
-                if(value.toLowerCase().includes(filter.toLowerCase())) return item
+                if(isIn(filter,value)) return item
             }
-            if(key.toLowerCase().includes(filter.toLowerCase())) return item
+            if(isIn(filter,key)) return item
         }
     })
 }
 
-console.log(filterWith(arrayObj, 'sur'));
+console.log(filterWith(arrayObj, 'kow'));
 

@@ -6,8 +6,7 @@ const filterFN = (array, callback) => {
     if(typeof callback != 'function') throw new Error('callback is not a function');
     const newArr = [];
     for(let i = 0; i < array.length; i++) {
-        let elements = array[i];
-        const condition = callback(elements, i, array);
+        const condition = callback(array[i], i, array);
         if(condition) newArr.push(elements);
     }
     return newArr
@@ -19,8 +18,7 @@ const mapFN = (array, callback) => {
     if(typeof callback != 'function') throw new Error('Callback is not a function');
     const newAr = [];
     for(let i = 0; i < array.length; i++) {
-        let elements = array[i];
-        const ar = callback(elements, i, array);
+        const ar = callback(array[i], i, array);
         newAr.push(ar);
     }
     return newAr;

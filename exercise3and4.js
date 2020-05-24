@@ -2,13 +2,15 @@
 
 const array = [1,2,3,4,5,6,7,8,9,10]
 
-const makeArray = ar => ar.map(item => Math.floor(Math.random(item) * 10))
+const generateRandomNumbers = ar => ar.map(item => Math.floor(Math.random() * 10))
 
-const generate10Arrays = arr => {
-    const tenArrays = arr.map((item,index,array) => {
-        return array.map(item => Math.floor(Math.random(item) * 10))
+const generateTenArraysOfNumbers = arr => {
+    const generateTenArrays = arr.map((item,index,array) => {
+        return array.map(item => Math.floor(Math.random() * 10))
     })
-    return tenArrays
+    return generateTenArrays
 }
 
-const tenMixedArrays = generate10Arrays(makeArray(array))
+const tenMixedArrays = generateTenArraysOfNumbers(generateRandomNumbers(array))
+
+console.log(tenMixedArrays);
