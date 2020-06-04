@@ -35,3 +35,103 @@ const filterWith = (array, filter) => {
 
 console.log(filterWith(arrayObj, 'kow'));
 
+class AddressBook {
+    constructor() {
+        this.allContacts = [];
+        this.listOfContactGrupe = [];
+    }
+    // Tworzyć kontakt w obrębie address book
+    // walidacja na instacje instanceOf - add
+    // crate ma przyjmować name, surname, email
+    create (contact) {
+        if(Object.keys(contact).length !== 0) {
+            console.log(`New phone number has been added with ID - ${contact.id}`, contact);
+            return this.allContacts.push(contact);
+        } else {
+            throw new Error('something went wrong, check your contact');
+        }
+    }
+
+    // add() {
+    //     if()
+    // }
+
+
+    readList () {
+        return console.log(this.allContacts);
+    }
+    // updateById(uuid, updatedData) czy updatedData zawiera konkretne lub przynajmniej jeden
+    // Operować na orginalny kontakt.
+    // korzystać z metody update z single contant
+    // znaleźć kontakt w allContact i uzyc update z single
+    // walidacja ma ignorować uuid
+    // jesli zmieniam dana klase, zmieniam ja w obrębie tej klasy
+    update(filter, data, updatedData) {
+        const item = this.allContacts.find(item => item.id === filter);
+        for(const key in item) {
+            if(key === data) {
+                item[key] = updatedData;
+            }
+        }
+        return item;
+    }
+    // return nie jest potrzebne.
+    // zrobić za pomocna filter.
+    delete(filter) {
+        const item = this.allContacts.find(item => item.id === filter);
+        const index = this.allContacts.indexOf(item);
+        return this.allContacts.splice(index, 1);
+    }
+
+
+    sortData (filter) {}
+}
+
+class SingleContact {
+    constructor(name,surname,email) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.id
+    }
+    // zrobić metode read i metode update
+    // pod id uzyć uuid
+    // walidacja kontaktu
+}
+
+class ContactsGroupe {
+    constructor() {
+        this.contactList = []
+    }
+
+    createList(contact) {
+        return this.contactList.push(contact);
+    }
+
+    readList () {
+        console.log(this.contactList);
+    }
+
+    updateList(fraza, updateData) {
+        return this.contactList.filter(item => {
+            if(item.name.toLowerCase().includes(fraza.toLowerCase())) {
+                item.name = updateData;
+            }
+            if(item.surname.toLowerCase().includes(fraza.toLowerCase())) {
+                item.surname = updateData;
+            }
+            if(item.email.toLowerCase().includes(fraza.toLowerCase())) {
+                item.email === updateData;
+            }
+        })
+    }
+}
+
+const book = new PhoneBook();
+const grupe = new ContactsGroupe();
+
+const single = new SingleContact('Tomasz', "Nowak", "asd@asdd.pl")
+const single1 = new SingleContact('Julek', "Kowalski", "asd@asdd.pl")
+const single2 = new SingleContact('Kowal', "Wenek", "asd@asdd.pl")
+
+book.create(single);
