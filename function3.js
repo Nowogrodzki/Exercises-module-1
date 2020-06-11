@@ -32,55 +32,55 @@ const filterWith = (array, filter) => {
         }
     })
 }
+import {v4 as uuidv4} from 'uuid';
 
-console.log(filterWith(arrayObj, 'kow'));
+const checkContactParameters = (name, surname, email) => {
+    if(typeof name !== 'string') throw new Error('name must be a string')
+    if(name.length < 2) throw new Error('Name must be greater then 2')
+
+    if(typeof surname !== 'string') throw new Error('Surname must be a string')
+    if(surname.length < 2) throw new Error('Surname must be greater then 2')
+
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error('something went wrong with email, please check your email address')
+}
 
 class AddressBook {
     constructor() {
         this.allContacts = [];
         this.listOfContactGrupe = [];
     }
-    // Tworzyć kontakt w obrębie address book
-    // walidacja na instacje instanceOf - add
-    // crate ma przyjmować name, surname, email
-    create (contact) {
-        if(Object.keys(contact).length !== 0) {
+
+    create(name,surname,email) {
+        // checkContactParameters(name,surname,email)
+        return new SingleContact({name,surname,email});
+    }
+          
+    add(contact) {
+        if(contact instanceof SingleContact) {
             console.log(`New phone number has been added with ID - ${contact.id}`, contact);
             return this.allContacts.push(contact);
         } else {
-            throw new Error('something went wrong, check your contact');
+            throw new Error('please enter correct argument');
         }
     }
-
-    // add() {
-    //     if()
-    // }
-
-
+    
     readList () {
         return console.log(this.allContacts);
     }
-    // updateById(uuid, updatedData) czy updatedData zawiera konkretne lub przynajmniej jeden
-    // Operować na orginalny kontakt.
-    // korzystać z metody update z single contant
-    // znaleźć kontakt w allContact i uzyc update z single
-    // walidacja ma ignorować uuid
-    // jesli zmieniam dana klase, zmieniam ja w obrębie tej klasy
-    update(filter, data, updatedData) {
-        const item = this.allContacts.find(item => item.id === filter);
-        for(const key in item) {
-            if(key === data) {
-                item[key] = updatedData;
-            }
-        }
-        return item;
+    // updatedDate => dataToUpade, value
+    // znaleźć pierwszy index (metoda find)
+    // bezposrendnio na tablicy
+    //
+    updateById(id, key, updatedData) {
+        if(key === 'id') throw new Error('id cannot be updated')
+        const [contact] = this.allContacts.filter(item => item.id === id);
+        return contact.update(key, updatedData);
     }
-    // return nie jest potrzebne.
-    // zrobić za pomocna filter.
-    delete(filter) {
-        const item = this.allContacts.find(item => item.id === filter);
+    // sprawdzic metode slice i splice(która modyfikuje referencje)
+    deleteById(id) {
+        const [item] = this.allContacts.filter(item => item.id === id);
         const index = this.allContacts.indexOf(item);
-        return this.allContacts.splice(index, 1);
+        this.allContacts.splice(index, 1);
     }
 
 
@@ -88,50 +88,34 @@ class AddressBook {
 }
 
 class SingleContact {
-    constructor(name,surname,email) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.id
-    }
-    // zrobić metode read i metode update
-    // pod id uzyć uuid
-    // walidacja kontaktu
-}
+    constructor(contactData) {
+        if(!contactData.name || !contactData.surname || !contactData.email) {
+            throw new Error('Data is missing one of the properties: name, surname, email');
+        }
 
-class ContactsGroupe {
-    constructor() {
-        this.contactList = []
+        checkContactParameters(contactData.name, contactData.surname, contactData.email);
+
+        this.name = contactData.name;
+        this.surname = contactData.surname;
+        this.email = contactData.email;
+        this.id = uuidv4();
     }
 
-    createList(contact) {
-        return this.contactList.push(contact);
-    }
+    update(key, updatedData) {
+        for(const element in this) {
+            if(key === 'id') throw new Error('Id cannot be updated!')
 
-    readList () {
-        console.log(this.contactList);
-    }
-
-    updateList(fraza, updateData) {
-        return this.contactList.filter(item => {
-            if(item.name.toLowerCase().includes(fraza.toLowerCase())) {
-                item.name = updateData;
+            if(element.toLowerCase() === key.toLowerCase()) {
+                this[element] = updatedData;
             }
-            if(item.surname.toLowerCase().includes(fraza.toLowerCase())) {
-                item.surname = updateData;
-            }
-            if(item.email.toLowerCase().includes(fraza.toLowerCase())) {
-                item.email === updateData;
-            }
-        })
+            checkContactParameters(this.name, this.surname, this.email)
+        }
     }
-}
 
-const book = new PhoneBook();
-const grupe = new ContactsGroupe();
+    read() {
+        console.log(this);
+    }
+}   
 
-const single = new SingleContact('Tomasz', "Nowak", "asd@asdd.pl")
-const single1 = new SingleContact('Julek', "Kowalski", "asd@asdd.pl")
-const single2 = new SingleContact('Kowal', "Wenek", "asd@asdd.pl")
-
-book.create(single);
+const contact = new SingleContact( { name: 'ss', surname: 'asd', email: 'com@andeer.pl' } )
+const book = new AddressBook();
