@@ -1,6 +1,6 @@
 // Exercise nr 8
 
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 
 const getRandomIndex = arr => Math.floor(Math.random() * arr.length);
 
@@ -18,9 +18,13 @@ const generateHuman = () => {
         age: Math.floor(Math.random() * 60) + 18,
         country: randomCountry[getRandomIndex(randomCountry)],
         phoneNr: `+48 ${parseInt(Math.random()*1000000000)}`,
-        id: uuidv4(),
+        id: 10
     }
     return person
 }
 
-console.log(generateHuman());
+const human = generateHuman();
+
+console.log(typeof human.phoneNr);
+
+module.exports = generateHuman;
