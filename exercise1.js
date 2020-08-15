@@ -52,3 +52,6 @@ last.then(item => console.log(item)).catch(error => console.log(`bład o nazwie 
 //         // ...
 //     })
 // }
+
+// https://github.com/Przemocny/localhost_academy/blob/master/4.%20Node/zadania/promiseMethods.js
+// https://github.com/Przemocny/localhost_academy/blob/master/4.%20Node/zadania/autoTranslator.js
